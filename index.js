@@ -1,5 +1,5 @@
 var x = require('sax-stream')
-var util = require("util")
+var stringify = require('json-stable-stringify')
 process.stdin.pipe(x({strict: true, tag: "page"})).on('data', (page) => {
     pc = page.children
     if(pc.revision.children) pc.revision = [pc.revision]
@@ -16,7 +16,7 @@ process.stdin.pipe(x({strict: true, tag: "page"})).on('data', (page) => {
              format: rc.format.value,
              text: rc.text.value,
              sha1: rc.sha1.value};
-        process.stdout.write(JSON.stringify(h))
+        process.stdout.write(stringify(h))
         process.stdout.write("\n")
     })
 })
