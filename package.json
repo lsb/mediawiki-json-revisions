@@ -1,5 +1,5 @@
 {"name": "pages-meta-history.js",
  "version": "1.0.0",
  "contributors": ["leeb"],
- "dependencies": {"xml-flow": "1.0.1"}
+ "dependencies": {"sax-stream": "1.2.2"}
 }

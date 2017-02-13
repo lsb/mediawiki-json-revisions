@@ -1,14 +1,22 @@
-var fs = require('fs'),
-    flow = require('xml-flow'),
-    xmlStream = flow(process.stdin);
-
-xmlStream.on("tag:page", page => {
-    if(page.revision.timestamp) page.revision = [page.revision]
-    page.revision.forEach(rev => {
-        rev.page_id = page.id
-        rev.page_title = page.title
-        rev.page_ns = page.ns
-        process.stdout.write(JSON.stringify(rev))
+var x = require('sax-stream')
+var util = require("util")
+process.stdin.pipe(x({strict: true, tag: "page"})).on('data', (page) => {
+    pc = page.children
+    if(pc.revision.children) pc.revision = [pc.revision]
+    pc.revision.forEach(rev => {
+        rc = rev.children
+        cc = rc.contributor.children
+        h = {page_id: pc.id.value,
+             page_title: pc.title.value,
+             page_ns: pc.ns.value,
+             id: rc.id.value,
+             timestamp: rc.timestamp.value,
+             contributor: cc && {username: cc.username && cc.username.value, id: cc.id && cc.id.value, ip: cc.ip && cc.ip.value},
+             model: rc.model.value,
+             format: rc.format.value,
+             text: rc.text.value,
+             sha1: rc.sha1.value};
+        process.stdout.write(JSON.stringify(h))
         process.stdout.write("\n")
     })
 })
