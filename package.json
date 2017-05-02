@@ -1,5 +1,7 @@
-{"name": "pages-meta-history.js",
- "version": "1.0.0",
- "contributors": ["leeb"],
- "dependencies": {"sax-stream": "1.2.2", "json-stable-stringify": "1.0.1"}
+{
+    "name": "mediawiki-json-revisions",
+    "description": "json encoded tsv of denormalized mediawiki-page-revisions",
+    "version": "2.0.0",
+    "contributors": ["leeb"],
+    "dependencies": {"sax": "1.2.2"}
 }
