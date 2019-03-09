@@ -33,7 +33,7 @@ parser.onopentag = ((node) => stack.push(node.name));
 parser.onclosetag = function() {
     if(whenToWriteOut === stack.join()) {
         backpressureStdout(JSON.stringify(revisionDetails)+"\n");
-        ["rid", "rtime", "ruid", "runm", "ruip", "rpagesha1"].forEach((idx) => revisionDetails[idx] = null);
+        ["rid", "rtime", "rtext", "ruid", "runm", "ruip", "rpagesha1"].forEach((idx) => revisionDetails[idx] = null);
     }
     if(whenToClear === stack.join()) {
         ["rpageid", "rpagetitle", "rpagens"].forEach((idx) => revisionDetails[idx] = null);
