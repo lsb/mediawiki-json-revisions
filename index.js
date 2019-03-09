@@ -1,5 +1,7 @@
 "use strict";
-const sax = require("sax"), parser = sax.createStream(false, {trim: true});
+const sax = require("sax");
+sax.MAX_BUFFER_LENGTH = Infinity;
+const parser = sax.createStream(false, {trim: true});
 
 function backpressureStdout(s) {
     if(!process.stdout.write(s, (() => process.stdin.resume())))
